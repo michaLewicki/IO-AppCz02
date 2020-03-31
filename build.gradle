@@ -17,6 +17,9 @@ dependencies {
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
+    // https://mvnrepository.com/artifact/io.vavr/vavr
+    compile group: 'io.vavr', name: 'vavr', version: '1.0.0-alpha-3'
+
 }
 
 test {
