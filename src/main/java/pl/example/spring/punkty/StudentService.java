@@ -6,10 +6,12 @@ public class StudentService {
     private List<Student> students = List.empty();
 
     List<Student> getStudents(){
-        return List.empty();
+        return this.students;
     }
 
-    Student addStudent(NewStudent nowyStudent) {
-        return new Student(1,"aa","aa","aa");
+    Student addStudent(NewStudent newStudent) {
+        Student created = new Student(students.size() + 1, newStudent.name, newStudent.number, newStudent.grupa);
+        students=students.prepend(created);
+        return created;
     }
 }
