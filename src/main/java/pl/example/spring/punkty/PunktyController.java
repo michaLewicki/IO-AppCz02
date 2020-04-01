@@ -14,7 +14,9 @@ import java.util.concurrent.CopyOnWriteArrayList;
 @RequestMapping(value = "/punkty")
 public class PunktyController {
 
-    private StudentService service = new StudentService();
+    private final StudentService service;
+
+    public PunktyController(StudentService service) { this.service = service;}
 
     @RequestMapping(value = "/students",method = RequestMethod.GET)
     public List<Student> getUsers() {
