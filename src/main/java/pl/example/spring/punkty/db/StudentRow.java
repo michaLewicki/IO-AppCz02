@@ -1,5 +1,7 @@
 package pl.example.spring.punkty.db;
 
+import pl.example.spring.punkty.Student;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,6 +15,8 @@ public class StudentRow {
     private String name;
     private String number;
     private String grupa;
+
+    public Student toStudent(){ return new Student( this.getId(), this.getName(), this.getNumber(), this.getGrupa()); }
 
     protected StudentRow(){} public StudentRow(String name, String number, String group1) { this.name = name; this.number = number; this.grupa = group1; }
 
