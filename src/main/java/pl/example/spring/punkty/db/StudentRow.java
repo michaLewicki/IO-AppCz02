@@ -2,10 +2,8 @@ package pl.example.spring.punkty.db;
 
 import pl.example.spring.punkty.Student;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class StudentRow {
@@ -51,4 +49,7 @@ public class StudentRow {
     public void setNumber(String number) {
         this.number = number;
     }
+
+    @OneToMany(mappedBy = "student")
+    private Set<ScoreRow> scores;
 }
