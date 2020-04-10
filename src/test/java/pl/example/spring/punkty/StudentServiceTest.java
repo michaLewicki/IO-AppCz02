@@ -7,6 +7,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import pl.example.spring.punkty.db.ScoreRepository;
 import pl.example.spring.punkty.db.StudentRepository;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,23 +19,27 @@ class StudentServiceTest {
     @Autowired
     private StudentRepository repository;
 
+    @Autowired
+    private ScoreRepository scoreRepository;
+
     @Test
     public void getEmptyList() {
-        final StudentService service = new StudentService(repository);
+        this.repository.deleteAll();
+        final StudentService service = new StudentService(repository, scoreRepository);
         List<Student> students = service.getStudents();
         assertTrue(students.isEmpty());
     }
 
     @Test
     public void testAddStudent() {
-        final StudentService service = new StudentService(repository);
+        final StudentService service = new StudentService(repository, scoreRepository);
         final Student created=service.addStudent(new NewStudent("Student1","1-2-3","IP"));
         assertNotNull(created);
     }
 
     @Test
     public void addStudentIsReturned() {
-        final StudentService service = new StudentService(repository);
+        final StudentService service = new StudentService(repository, scoreRepository);
         final Student created = service.addStudent(new NewStudent("Student1", "1-2-3", "IP"));
         final List<Student> all = service.getStudents();
         assertEquals("Student1", all.head().name);
@@ -42,7 +47,7 @@ class StudentServiceTest {
 
     @Test
     public void addStudentHasNewId() {
-        final StudentService service = new StudentService(repository);
+        final StudentService service = new StudentService(repository, scoreRepository);
         final Student created1 = service.addStudent(new NewStudent("Student1", "1-2-3","IP"));
         final Student created2 = service.addStudent(new NewStudent("Student2", "4-5-6","ZIP"));
         final List<Student> studenci = service.getStudents();

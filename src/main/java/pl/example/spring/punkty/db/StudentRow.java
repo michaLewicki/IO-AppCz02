@@ -52,4 +52,12 @@ public class StudentRow {
 
     @OneToMany(mappedBy = "student")
     private Set<ScoreRow> scores;
+
+    public Set<ScoreRow> getScores() {
+        return scores;
+    }
+
+    public void setScores(Set<ScoreRow> scores) {
+        this.scores = scores;
+    }
 }

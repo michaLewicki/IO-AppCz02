@@ -32,6 +32,6 @@ public class PunktyController {
 
     @RequestMapping(value = "/students/{id}/scores", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public int addScore(@PathVariable("id") long id, @RequestBody Score score) {
-        return this.service.addScore(id, score);
+        return this.service.addScore(id, score).orElseThrow( ()->new IllegalArgumentException("Student id: " + id + " does not exist"));
     }
 }
